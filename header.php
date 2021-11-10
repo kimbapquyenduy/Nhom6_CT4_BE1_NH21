@@ -1,8 +1,12 @@
 <?php
+session_start();
 require "config.php";
 require "models/db.php";
 require "models/product.php";
+require "models/manufacture.php";
+$manu = new Manufacture;
 $product = new Product;
+$getAllManu = $manu->getAllManu();
 $getAllProducts = $product->getAllProducts();
 $getNewProducts = $product->getNewProducts();
 ?>
@@ -43,6 +47,10 @@ $getNewProducts = $product->getNewProducts();
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+
 </head>
 
 <body>
@@ -73,7 +81,7 @@ $getNewProducts = $product->getNewProducts();
                     <!-- LOGO -->
                     <div class="col-md-3">
                         <div class="header-logo">
-                            <a href="#" class="logo">
+                            <a href="/nhom6/index.php" class="logo">
                                 <img src="./img/logo.png" alt="">
                             </a>
                         </div>
@@ -100,13 +108,13 @@ $getNewProducts = $product->getNewProducts();
                     <div class="col-md-3 clearfix">
                         <div class="header-ctn">
                             <!-- Wishlist -->
-                            <div>
+                            <!-- <div>
                                 <a href="#">
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
                                     <div class="qty">2</div>
                                 </a>
-                            </div>
+                            </div> -->
                             <!-- /Wishlist -->
 
                             <!-- Cart -->
@@ -145,7 +153,7 @@ $getNewProducts = $product->getNewProducts();
                                         <h5>SUBTOTAL: $2940.00</h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="#">View Cart</a>
+                                        <a href="addcart.php">View Cart</a>
                                         <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
@@ -181,12 +189,13 @@ $getNewProducts = $product->getNewProducts();
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Hot Deals</a></li>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Smartphones</a></li>
-                    <li><a href="#">Cameras</a></li>
-                    <li><a href="#">Accessories</a></li>
+                    <?php
+                    foreach ($getAllManu as $value) :
+
+                    ?>
+                        <li><a href="products.php?manu_id=<?php echo $value['manu_id'] ?>">
+                                <?php echo $value['manu_name'] ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
                 <!-- /NAV -->
             </div>

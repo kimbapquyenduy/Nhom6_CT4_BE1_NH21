@@ -1,4 +1,6 @@
 <?php include "header.php"; ?>
+
+
 <!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">
 	<!-- container -->
@@ -236,33 +238,25 @@
 
 				<!-- store products -->
 				<div class="row">
+
 					<?php
+					if (isset($_GET['manu_id'])) :
+						$manu_id = $_GET['manu_id'];
 
+						$GetProductsByManu = $product->getProductByManu($manu_id);
 
-
-					if (isset($_GET['keyword'])) {
-						# code...
-
-						$keyword = $_GET['keyword'];
+						// hiển thị 5 sản phẩm trên 1 trang
 						$perPage = 3;
-						$search = $product->search($keyword);
 						// Lấy số trang trên thanh địa chỉ
 						$page = isset($_GET['page']) ? $_GET['page'] : 1;
 						// Tính tổng số dòng
-						$total = count($search);
+						$total = count($GetProductsByManu);
 						// lấy đường dẫn đến file hiện hành
-						$url = $_SERVER['PHP_SELF'] . "?keyword=" . $keyword;
+						$url = $_SERVER['PHP_SELF'] . "?manu_id=" . $manu_id;
 
-						$search3pro = $product->search3pro($keyword, $page, $perPage);
-						if (empty($search3pro)) {
-							echo "Không có sản phẩm nào";
-						} else
-
-							foreach ($search3pro as $value) {
-
-
+						$Get3ProductsByManu = $product->get3ProductsByManu($manu_id, $page, $perPage);
+						foreach ($Get3ProductsByManu as $value) :
 					?>
-
 							<!-- product -->
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
@@ -276,7 +270,7 @@
 									<div class="product-body">
 										<p class="product-category">Category</p>
 										<h3 class="product-name"><a href="#"><?php echo $value['name'] ?></a></h3>
-										<h4 class="product-price"><?php echo number_format($value['price']) ?> <del class="product-old-price"><?php echo number_format($value['price']) ?></del></h4>
+										<h4 class="product-price"><?php echo number_format($value['price']);  ?></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -291,15 +285,13 @@
 										</div>
 									</div>
 									<div class="add-to-cart">
-										<a href="addcart.php?id=<?php echo $value['id']; ?>"> <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+										<a href="addcart.php?id=<?php echo $value['id']; ?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button> </a>
 									</div>
 								</div>
 							</div>
 							<!-- /product -->
-						<?php
+						<?php endforeach; ?>
 
-							}
-						?>
 				</div>
 				<!-- /store products -->
 
@@ -307,12 +299,16 @@
 				<div class="store-filter clearfix">
 					<span class="store-qty">Showing 20-100 products</span>
 					<ul class="store-pagination">
-						<?php echo $product->paginate($url, $total, $perPage); ?>
+
+						<?php
+
+
+
+						echo $product->paginate($url, $total, $perPage) ?>
 					</ul>
 				</div>
-			<?php } ?>
-			<!-- /store bottom filter -->
-
+				<!-- /store bottom filter -->
+			<?php endif; ?>
 			</div>
 			<!-- /STORE -->
 		</div>
@@ -321,5 +317,4 @@
 	<!-- /container -->
 </div>
 <!-- /SECTION -->
-
-<?php include "footer.html" ?>
+<?php include "footer.html"; ?>
