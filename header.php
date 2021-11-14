@@ -4,11 +4,33 @@ require "config.php";
 require "models/db.php";
 require "models/product.php";
 require "models/manufacture.php";
+
 $manu = new Manufacture;
 $product = new Product;
+
 $getAllManu = $manu->getAllManu();
 $getAllProducts = $product->getAllProducts();
 $getNewProducts = $product->getNewProducts();
+
+if (isset($_POST['add'])) {
+
+    if (isset($_SESSION['cart'])) {
+        $item_array_id = array_column($_SESSION['cart'], "productid");
+
+        if (in_array($_POST['productid'], $item_array_id)) {
+            echo "<script>alert('sản phẩm đã có trong giỏ hàng')</script>";
+            echo "<script>window.location='index.php'</script>";
+        } else {
+            $count = count($_SESSION['cart']);
+            $itemarray = array('productid' => $_POST['productid']);
+            $_SESSION['cart'][$count] = $itemarray;
+        }
+    } else {
+        $itemarray = array('productid' => $_POST['productid']);
+        $_SESSION['cart'][0] = $itemarray;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,9 +69,9 @@ $getNewProducts = $product->getNewProducts();
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-    <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 
@@ -122,38 +144,58 @@ $getNewProducts = $product->getNewProducts();
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Your Cart</span>
-                                    <div class="qty">3</div>
+                                    <div class="qty"><?php if (isset($_SESSION['cart'])) {
+                                                            $count = count($_SESSION['cart']);
+                                                            echo $count;
+                                                        } else {
+
+                                                            echo "0";
+                                                        } ?></div>
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="cart-list">
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product01.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
+                                        <?php $total = 0;
+                                        if (isset($_SESSION['cart'])) {
+                                            # code...
 
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product02.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
+                                            $productid = array_column($_SESSION['cart'], 'productid');
+                                            $total = 0;
+
+                                            foreach ($getAllProducts as $value) {
+                                                foreach ($productid as $id) {
+                                                    if ($value['id'] == $id) {
+
+
+                                        ?>
+                                                        <div class="product-widget">
+
+                                                            <div class="product-img">
+                                                                <img src="./img/<?php echo $value['image']; ?>" alt="">
+                                                            </div>
+                                                            <div class="product-body">
+                                                                <h3 class="product-name"><a href="detail.php?id=<?php echo $value['id']; ?>"> <?php echo $value['name']; ?> </a></h3>
+                                                                <h4 class="product-price"><?php echo number_format($value['price']); ?><span class="qty"></span></h4>
+                                                            </div>
+                                                            <!-- <button class="delete"><i class="fa fa-close"></i></button> -->
+                                                        </div>
+                                        <?php $total = $total + $value['price'];
+                                                    };
+                                                };
+                                            };
+                                        }; ?>
                                     </div>
+
                                     <div class="cart-summary">
-                                        <small>3 Item(s) selected</small>
-                                        <h5>SUBTOTAL: $2940.00</h5>
+                                        <small><?php if (isset($_SESSION['cart'])) {
+                                                    $count = count($_SESSION['cart']);
+                                                    echo $count;
+                                                } else {
+                                                    echo "0";
+                                                } ?></small>
+                                        <h5>SUBTOTAL: <?php echo " " . number_format($total); ?></h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="addcart.php">View Cart</a>
+                                        <a href="addtocart.php">View Cart</a>
                                         <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
