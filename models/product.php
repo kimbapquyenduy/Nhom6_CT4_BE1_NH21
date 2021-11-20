@@ -27,6 +27,72 @@
             $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
             return $items; //return an array
         }
+        // "SELECT * 
+        //     FROM products,manufactures,protypes
+        //     WHERE products.manu_id=manufactures.manu_id
+        //     AND products.type_id=protypes.type_id LIMIT ?,?"
+        public function get3AppleProduct($slide, $perslide)
+        {
+            $sql = self::$connection->prepare("SELECT * FROM products,protypes WHERE manu_id = 1 and products.type_id=protypes.type_id LIMIT ?,?");
+            $firstslide = ($slide - 1) * $perslide;
+            $sql->bind_param("ii", $firstslide, $perslide);
+            $sql->execute(); //return an object
+            $items = array();
+            $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $items; //return an array
+        }
+        public function getAppleProduct()
+        {
+            $sql = self::$connection->prepare("SELECT * FROM products WHERE manu_id=1");
+
+
+            $sql->execute(); //return an object
+            $items = array();
+            $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $items; //return an array
+        }
+        public function getHotProduct()
+        {
+            $sql = self::$connection->prepare("SELECT * FROM products WHERE feature=1");
+
+
+            $sql->execute(); //return an object
+            $items = array();
+            $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $items; //return an array
+        }
+        public function get3HotProduct($slide, $perslide)
+        {
+            $sql = self::$connection->prepare("SELECT * FROM products,protypes WHERE feature=1  and products.type_id=protypes.type_id LIMIT ?,?");
+            $firstslide = ($slide - 1) * $perslide;
+            $sql->bind_param("ii", $firstslide, $perslide);
+            $sql->execute(); //return an object
+            $items = array();
+            $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $items; //return an array
+        }
+
+        public function get3XiaomiProduct($slide, $perslide)
+        {
+            $sql = self::$connection->prepare("SELECT * FROM products,protypes WHERE manu_id=3  and products.type_id=protypes.type_id LIMIT ?,?");
+            $firstslide = ($slide - 1) * $perslide;
+            $sql->bind_param("ii", $firstslide, $perslide);
+            $sql->execute(); //return an object
+            $items = array();
+            $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $items; //return an array
+        }
+
+        public function getXiaomiProduct()
+        {
+            $sql = self::$connection->prepare("SELECT * FROM products WHERE manu_id=3");
+
+
+            $sql->execute(); //return an object
+            $items = array();
+            $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+            return $items; //return an array
+        }
         public function get3ProductsByManu($manu_id, $page, $perPage)
         {
             // Tính số thứ tự trang bắt đầu
@@ -108,7 +174,4 @@
             $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
             return $items; //return an array
         }
-        
-
-
     }

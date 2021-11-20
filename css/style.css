@@ -62,17 +62,19 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #2B2D42;
+  color: #2B2D42 ;
   font-weight: 700;
   margin: 0 0 10px;
 }
 
-a  {
-  color: #2B2D42 im !important;
+a{
+  color:#2B2D42  ;
   font-weight: 500;
   -webkit-transition: 0.2s color;
   transition: 0.2s color;
 }
+
+
 
 a:hover, a:focus {
   color: #D10024;
@@ -635,6 +637,8 @@ textarea.input {
 
 .main-nav>li>a {
   padding: 20px 0px;
+  color: #2B2D42 !important;
+  
 }
 
 .main-nav>li>a:hover, .main-nav>li>a:focus, .main-nav>li.active>a {
@@ -918,7 +922,8 @@ textarea.input {
 }
 
 .product .product-body .product-name>a {
-  font-weight: 700;
+  font-weight: 600;
+  color: #2B2D42;
 }
 
 .product .product-body .product-name>a:hover, .product .product-body .product-name>a:focus {
@@ -1114,7 +1119,8 @@ textarea.input {
 }
 
 .product-widget .product-body .product-name>a {
-  font-weight: 700;
+  font-weight: 500;
+  color: #2B2D42;
 }
 
 .product-widget .product-body .product-name>a:hover, .product-widget .product-body .product-name>a:focus {

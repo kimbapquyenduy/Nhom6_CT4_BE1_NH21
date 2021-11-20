@@ -12,6 +12,7 @@ $getAllManu = $manu->getAllManu();
 $getAllProducts = $product->getAllProducts();
 $getNewProducts = $product->getNewProducts();
 
+
 if (isset($_POST['add'])) {
 
     if (isset($_SESSION['cart'])) {
@@ -230,14 +231,40 @@ if (isset($_POST['add'])) {
             <div id="responsive-nav">
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <?php
-                    foreach ($getAllManu as $value) :
+
+                    <?php if (isset($_GET['manu_id'])) { ?>
+                        <li><a class="text-warning" href="index.php">Home</a></li>
+                        <?php
+                        $curlocation = $_SERVER['PHP_SELF'] . "?manu_id=" . $_GET['manu_id'];
+
+                        foreach ($getAllManu as $value) {
+
+
+                        ?>
+                            <li class="<?php echo ($curlocation == "/nhom6/products.php?manu_id=" . $value['manu_id'] ? "active" : "") ?> "><a href="products.php?manu_id=<?php echo $value['manu_id'] ?>">
+                                    <?php echo $value['manu_name'] ?></a></li>
+                        <?php
+
+
+                        }
+                    } else {
+                        ?>
+                        <li class="active"><a class="text-warning" href="index.php">Home</a></li>
+                        <?php
+                        foreach ($getAllManu as $value) :
+                        ?>
+                            <li><a href="products.php?manu_id=<?php echo $value['manu_id'] ?>">
+                                    <?php echo $value['manu_name'] ?></a></li>
+
+
+
+                        <?php endforeach; ?>
+
+
+                    <?php     }
+
 
                     ?>
-                        <li><a href="products.php?manu_id=<?php echo $value['manu_id'] ?>">
-                                <?php echo $value['manu_name'] ?></a></li>
-                    <?php endforeach; ?>
                 </ul>
                 <!-- /NAV -->
             </div>
