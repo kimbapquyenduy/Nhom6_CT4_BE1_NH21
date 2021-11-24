@@ -1,4 +1,5 @@
-<?php include "header.php" ?>
+<?php $title = "TECH | Manufactures";
+include "header.php" ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -7,7 +8,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Projects</h1>
+          <h1>Manufactures</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -25,7 +26,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Projects</h3>
+        <h3 class="card-title">Manufactures</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -70,7 +71,7 @@
                     </i>
                     Edit
                   </a>
-                  <a class="btn btn-danger btn-sm" href="#">
+                  <a class="btn btn-danger btn-sm" href="delmanu.php?manu_id=<?php echo $value['manu_id'] ?>">
                     <i class="fas fa-trash">
                     </i>
                     Delete

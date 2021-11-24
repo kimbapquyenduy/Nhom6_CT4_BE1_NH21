@@ -1,4 +1,5 @@
-<?php include "header.php" ?>
+<?php $title = "TECH | Dashboard";
+include "header.php" ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -29,9 +30,16 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
 
-              <p>New Orders</p>
+              <?php
+              $count = 0;
+              foreach ($getAllProducts as $value) {
+                $count++;
+              }
+              ?>
+              <h3> <?php echo $count; ?></h3>
+
+              <p> Products Amount</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -44,9 +52,15 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <?php
+              $count = 0;
+              foreach ($getAllManu as $value) {
+                $count++;
+              }
+              ?>
+              <h3><?php echo $count ?><sup style="font-size: 20px"></sup></h3>
 
-              <p>Bounce Rate</p>
+              <p>Manufactures Amount</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -529,13 +543,13 @@
             <div class="card-footer bg-transparent">
               <div class="row">
                 <div class="col-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                  <input type="text" class="knob" data-readonly="true" value="100" data-width="60" data-height="60" data-fgColor="#39CCCC">
 
                   <div class="text-white">Mail-Orders</div>
                 </div>
                 <!-- ./col -->
                 <div class="col-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                  <input type="text" class="knob" data-readonly="true" value="100" data-width="60" data-height="60" data-fgColor="#39CCCC">
 
                   <div class="text-white">Online</div>
                 </div>

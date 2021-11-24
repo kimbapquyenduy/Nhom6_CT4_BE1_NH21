@@ -14,6 +14,7 @@ $getAllProducts = $product->getAllProducts();
 $getNewProducts = $product->getNewProducts();
 $getallpro = $pro->getAllPro();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@ $getallpro = $pro->getAllPro();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title><?php echo $title; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -191,9 +192,9 @@ $getallpro = $pro->getAllPro();
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <a href="index.php" class="brand-link">
+                <img src="../img/cmplogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">TECH</span>
             </a>
 
             <!-- Sidebar -->
@@ -244,7 +245,7 @@ $getallpro = $pro->getAllPro();
                                 <i class="nav-icon fab fa-product-hunt"></i>
                                 <p>
                                     Product
-
+                                    <?php $title = "product" ?>
                                 </p>
                             </a>
 
@@ -264,6 +265,36 @@ $getallpro = $pro->getAllPro();
                                 <i class="nav-icon fas fa-mobile"></i>
                                 <p>
                                     Prototype
+
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item <?php echo ($page == "/nhom6/admin/project-add.php" ? "menu-open" : "") ?>">
+                            <a href="project-add.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-add.php" ? "active" : "") ?>" style="a:hover ">
+                                <i class="nav-icon fas fa-mobile"></i>
+                                <p>
+                                    Add-product
+
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item <?php echo ($page == "/nhom6/admin/project-addmanu.php" ? "menu-open" : "") ?>">
+                            <a href="project-addmanu.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-addmanu.php" ? "active" : "") ?>" style="a:hover ">
+                                <i class="nav-icon fas fa-mobile"></i>
+                                <p>
+                                    Add-Manufacture
+
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item <?php echo ($page == "/nhom6/admin/project-addprotype.php" ? "menu-open" : "") ?>">
+                            <a href="project-addprotype.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-addprotype.php" ? "active" : "") ?>" style="a:hover ">
+                                <i class="nav-icon fas fa-mobile"></i>
+                                <p>
+                                    Add-Protype
 
                                 </p>
                             </a>
