@@ -25,7 +25,7 @@
                                     <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a href="/nhom6/index.php">
+                                    <a href="/nhom6/index.php" style="text-decoration: none;">
                                         <button type="button" class="btn btn-primary btn-sm btn-block" style="background-color:#D10024 ;color:white;font-weight:900">
                                             Continue shopping
                                         </button></a>
@@ -78,7 +78,9 @@
                                     };
                                 };
                             };
-                        };
+                        }
+
+
 
                         ?>
 
@@ -126,9 +128,9 @@
                                 <h4 class="text-right" style="padding-top: 10px;">Total : <?php echo " " . number_format($total); ?> <strong></strong></h4>
                             </div>
                             <div class="col-xs-3">
-                                <button type="button" class="btn btn-success btn-block" style="background-color:#D10024 ;color:white;font-weight:900">
-                                    Checkout
-                                </button>
+                                <a href="checkout.php" style="text-decoration: none;"> <button type="button" class="btn btn-success btn-block" style="background-color:#D10024 ;color:white;font-weight:900">
+                                        Checkout
+                                    </button></a>
                             </div>
                         </div>
                     </div>
