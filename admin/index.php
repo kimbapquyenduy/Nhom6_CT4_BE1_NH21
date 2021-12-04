@@ -1,5 +1,10 @@
-<?php $title = "TECH | Dashboard";
-include "header.php" ?>
+<?php
+
+$title = "TECH | Dashboard";
+include "header.php";
+
+
+?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -53,6 +58,7 @@ include "header.php" ?>
           <div class="small-box bg-success">
             <div class="inner">
               <?php
+
               $count = 0;
               foreach ($getAllManu as $value) {
                 $count++;

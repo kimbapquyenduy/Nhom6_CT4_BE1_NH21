@@ -4,9 +4,11 @@ require "config.php";
 require "models/db.php";
 require "models/product.php";
 require "models/manufacture.php";
+require "models/account.php";
 
 $manu = new Manufacture;
 $product = new Product;
+$account = new Account;
 
 $getAllManu = $manu->getAllManu();
 $getAllProducts = $product->getAllProducts();
@@ -88,8 +90,20 @@ if (isset($_POST['add'])) {
                     <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
+                    <?php if (isset($_SESSION['username'])) { ?>
+
+                        <li><a href="login-form/logout.php"><i class="fa fa-user-o"></i><?php echo $_SESSION['username']; ?> Logout</a></li>
+
+                    <?php
+                    } else { ?>
+
+                        <li><a href="login-form/login.php"><i class="fa fa-user-o"></i>Login</a></li>
+
+                    <?php     }
+                    ?>
+
+
                 </ul>
             </div>
         </div>

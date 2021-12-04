@@ -21,6 +21,18 @@
             $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
             return $items; //return an array
         }
+        public function editProduct($name, $manu_id, $type_id, $price, $image, $desc, $id)
+        {
+            if ($image == "") {
+                $sql = self::$connection->prepare("UPDATE `products` SET `name`=?,`manu_id`=?,`type_id`=?,`price`=?,`descripsion`=? WHERE id = ?");
+                $sql->bind_param("siiisi", $name, $manu_id, $type_id, $price, $desc, $id);
+            } else {
+                $sql = self::$connection->prepare("UPDATE `products` SET `name`=?,`manu_id`=?,`type_id`=?,`price`=?,`image`=?,`descripsion`=? WHERE id = ?");
+                $sql->bind_param("siiissi", $name, $manu_id, $type_id, $price, $image, $desc, $id);
+                //return an object
+            }
+            return  $sql->execute();
+        }
 
         public function addProduct($name, $manu_id, $type_id, $price, $image, $desc)
         {

@@ -122,7 +122,7 @@ include "header.php"
 
                 <td class="project-actions text-center ">
 
-                  <a class="btn btn-info btn-sm" href="#">
+                  <a class="btn btn-info btn-sm" href="Product-edit.php?id=<?php echo $value['id']; ?>">
                     <i class="fas fa-pencil-alt">
                     </i>
                     Edit

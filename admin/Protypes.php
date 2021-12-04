@@ -68,7 +68,7 @@ include "header.php" ?>
 
                 <td class="project-actions text-center ">
 
-                  <a class="btn btn-info btn-sm" href="#">
+                  <a class="btn btn-info btn-sm" href="Protypes-edit?id=<?php echo $value['type_id'] ?>.php">
                     <i class="fas fa-pencil-alt">
                     </i>
                     Edit

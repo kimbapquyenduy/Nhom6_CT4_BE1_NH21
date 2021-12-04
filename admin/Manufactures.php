@@ -66,7 +66,7 @@ include "header.php" ?>
 
                 <td class="project-actions text-center ">
 
-                  <a class="btn btn-info btn-sm" href="#">
+                  <a class="btn btn-info btn-sm" href="Manu-edit?id=<?php echo $value["manu_id"] ?>.php">
                     <i class="fas fa-pencil-alt">
                     </i>
                     Edit
