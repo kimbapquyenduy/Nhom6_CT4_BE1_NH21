@@ -1,4 +1,11 @@
-<?php include "header.php"; ?>
+<?php include "header.php";
+if (!isset($_SESSION['username'])) {
+	
+		echo "<script>window.location='login-form/login.php'</script>";
+	
+}
+
+?>
 
 <!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">

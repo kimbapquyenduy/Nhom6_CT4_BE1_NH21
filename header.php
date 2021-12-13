@@ -5,14 +5,17 @@ require "models/db.php";
 require "models/product.php";
 require "models/manufacture.php";
 require "models/account.php";
+require "models/protypes.php";
 
 $manu = new Manufacture;
 $product = new Product;
 $account = new Account;
+$protype = new Protypes;
 
 $getAllManu = $manu->getAllManu();
 $getAllProducts = $product->getAllProducts();
 $getNewProducts = $product->getNewProducts();
+$getallprotypes = $protype->getAllPro();
 
 
 if (isset($_POST['add'])) {
@@ -25,11 +28,11 @@ if (isset($_POST['add'])) {
             echo "<script>window.location='index.php'</script>";
         } else {
             $count = count($_SESSION['cart']);
-            $itemarray = array('productid' => $_POST['productid']);
+            $itemarray = array('productid' => $_POST['productid'], 'num' => $_POST['num']);
             $_SESSION['cart'][$count] = $itemarray;
         }
     } else {
-        $itemarray = array('productid' => $_POST['productid']);
+        $itemarray = array('productid' => $_POST['productid'], 'num' => $_POST['num']);
         $_SESSION['cart'][0] = $itemarray;
     }
 }
@@ -85,9 +88,9 @@ if (isset($_POST['add'])) {
         <div id="top-header">
             <div class="container">
                 <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+                    <!-- <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
                     <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li> -->
                 </ul>
                 <ul class="header-links pull-right">
                     <!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
@@ -252,14 +255,10 @@ if (isset($_POST['add'])) {
                         $curlocation = $_SERVER['PHP_SELF'] . "?manu_id=" . $_GET['manu_id'];
 
                         foreach ($getAllManu as $value) {
-
-
                         ?>
                             <li class="<?php echo ($curlocation == "/nhom6/products.php?manu_id=" . $value['manu_id'] ? "active" : "") ?> "><a href="products.php?manu_id=<?php echo $value['manu_id'] ?>">
                                     <?php echo $value['manu_name'] ?></a></li>
                         <?php
-
-
                         }
                     } else {
                         ?>

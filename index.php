@@ -66,14 +66,7 @@ include "header.php";
 			<div class="col-md-12">
 				<div class="section-title">
 					<h3 class="title">New Products</h3>
-					<div class="section-nav">
-						<ul class="section-tab-nav tab-nav">
-							<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-							<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-							<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-							<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
-						</ul>
-					</div>
+
 				</div>
 			</div>
 			<!-- /section title -->
@@ -118,6 +111,7 @@ include "header.php";
 											<form action="" method="post">
 												<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
 												<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
+												<input type="hidden" name="num" value="1">
 											</form>
 										</div>
 									</div>
@@ -203,10 +197,26 @@ include "header.php";
 					<h3 class="title">Top selling</h3>
 					<div class="section-nav">
 						<ul class="section-tab-nav tab-nav">
-							<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-							<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-							<li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-							<li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+							<?php if (isset($_GET['type_id'])) { ?>
+								<?php $curlocation = $_SERVER['PHP_SELF'] . "?type_id=" . $_GET['type_id'];
+								foreach ($getallprotypes as $value) :
+								?>
+
+									<li class="<?php echo ($curlocation == "/nhom6/index.php?type_id=" . $value['type_id'] ? "active" : "") ?>"><a href="index.php?type_id=<?php echo $value['type_id'] ?>"><?php echo $value['type_name'] ?></a></li>
+
+
+								<?php endforeach; ?>
+
+
+								<?php     } else {
+								foreach ($getallprotypes as $value) : ?>
+
+									<li class="<?php echo  $value['type_id'] == 1 ? "active" : "" ?>"><a href="index.php?type_id=<?php echo $value['type_id'] ?>"><?php echo $value['type_name'] ?></a></li>
+
+							<?php
+								endforeach;
+							}
+							?>
 						</ul>
 					</div>
 				</div>
@@ -221,47 +231,53 @@ include "header.php";
 						<div id="tab2" class="tab-pane fade in active">
 							<div class="products-slick" data-nav="#slick-nav-2">
 								<!-- product -->
-								<?php foreach ($getAllProducts as $value) {
-									if ($value['id'] < 9) {
+
+								<?php
+								if (!isset($_GET['type_id'])) {
+									$_GET['type_id'] = 1;
+								}
+								$getProductsByProtype = $product->getProductsByProtype($_GET['type_id']);
+								foreach ($getProductsByProtype as $value) {
+
 
 
 								?>
-										<div class="product">
-											<div class="product-img">
-												<img src="./img/<?php echo $value['image'] ?>" alt="">
-												<div class="product-label">
-													<!-- <span class="sale">-30%</span>
+									<div class="product">
+										<div class="product-img">
+											<img src="./img/<?php echo $value['image'] ?>" alt="">
+											<div class="product-label">
+												<!-- <span class="sale">-30%</span>
 													<span class="new">NEW</span> -->
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="detail.php?id=<?php echo $value['id']; ?>"><?php echo $value['name'] ?></a></h3>
-												<h4 class="product-price"> <?php echo number_format($value['price']) ?> VND</h4>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<form action="" method="post">
-													<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
-													<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
-												</form>
 											</div>
 										</div>
+										<div class="product-body">
+											<p class="product-category">Category</p>
+											<h3 class="product-name"><a href="detail.php?id=<?php echo $value['id']; ?>"><?php echo $value['name'] ?></a></h3>
+											<h4 class="product-price"> <?php echo number_format($value['price']) ?> VND</h4>
+											<div class="product-rating">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+											</div>
+											<div class="product-btns">
+												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+												<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											</div>
+										</div>
+										<div class="add-to-cart">
+											<form action="" method="post">
+												<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
+											</form>
+										</div>
+									</div>
 
 
 								<?php }
-								} ?>
+								?>
 							</div>
 							<div id="slick-nav-2" class="products-slick-nav"></div>
 						</div>

@@ -51,7 +51,7 @@ $account = new Account;
 									</p>
 								</div>
 							</div>
-							<form action="" class="signin-form" method="get">
+							<form action="" class="signin-form" method="post">
 								<div class="form-group mb-3">
 									<label class="label" for="name">Username</label>
 									<input type="text" name="Username" class="form-control" placeholder="Username" required>
@@ -70,40 +70,25 @@ $account = new Account;
 						<?php
 
 
-						if (isset($_GET['submit'])) {
-
-							$accountarr = $account->getAllAccount();
-							foreach ($accountarr as  $value) {
+						if (isset($_POST['submit'])) {
 
 
-								$s = password_hash($value['password'], PASSWORD_DEFAULT);
-								if ($_GET['Username'] == "admin" && password_verify(12345, $s)) {
-
-									$check = "admin";
-									break;
-								} else if ($_GET['Username'] == $value['username'] && password_verify($_GET['Password'], $s)) {
-									$check = 1;
-									break;
-								} else {
-									$check = 0;
-								}
-							}
-							if ($check == 1) {
-
-								$_SESSION['username'] = $_GET['Username'];
-								echo "<script>alert('Đăng Nhập Thành Công !')</script>";
-								echo "<script>window.location='../index.php'</script>";
-							}
-							if ($check == "admin") {
-								$_SESSION['username'] = $_GET['Username'];
+							$username = $_POST['Username'];
+							$password = $_POST['Password'];
+							if ($account->checklogin($username, $password)) {
+								$_SESSION['username'] = $username;
 								echo "<script>alert('Đăng Nhập Thành Công !')</script>";
 								echo "<script>window.location='../admin/index.php'</script>";
 							} else {
-								echo "<script>alert('Đăng Nhập Thất Bại !')</script>";
+								echo "<script>alert('Đăng Nhập Thất bại !')</script>";
+								echo "<script>window.location='../index.php'</script>";
 							}
+						}
+
+
 
 						?>
-						<?php } ?>
+
 					</div>
 				</div>
 			</div>

@@ -11,7 +11,11 @@
             }
         }
     }
-} ?>
+}
+
+
+
+?>
 
 <body>
     <div class="container">
@@ -37,16 +41,19 @@
                     <div class="panel-body">
                         <?php
                         $total = 0;
+
+
                         if (isset($_SESSION['cart'])) {
                             # code...
 
                             $productid = array_column($_SESSION['cart'], 'productid');
+                            $productnum = array_column($_SESSION['cart'],  'num');
 
 
                             foreach ($getAllProducts as $value) {
-                                foreach ($productid as $id) {
-                                    if ($value['id'] == $id) {
-
+                                foreach ($_SESSION['cart'] as $value2) {
+                                    if ($value['id'] == $value2['productid']) {
+                                       
 
                         ?>
                                         <form action="addtocart.php?action=remove&id=<?php echo $value['id'] ?>" method="post">
@@ -59,11 +66,19 @@
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <div class="col-xs-6 text-right">
-                                                        <h6 style="padding-top: 20px;font-size:15px"><strong><?php echo number_format($value['price']);  ?> <span class="text-muted">x</span></strong></h6>
+                                                    <input type="hidden"  class="iprice" value="<?php echo $value['price']?>">
+                                                        <h6 style="padding-top: 20px;font-size:15px" ><strong><?php echo number_format($value['price']);  ?> <span class="text-muted">x</span> </strong></h6>
                                                     </div>
                                                     <div class="col-xs-4">
-                                                        <h5 style="padding-top: 20px;font-size:15px"> </h5>
+                                                        <h5 style="padding-top: 15px;font-size:15px">
+                                                            <form action="" method="post">
+                                                                <input type="number" class="iquantity" onchange="countTotal()" min="1" max="10" name="quan" value="<?php echo $value2['num'] ?>">
+                                                               
+
+                                                            </form>
+                                                        </h5>
                                                     </div>
+
                                                     <div class="col-xs-2">
 
                                                         <button type="submit" class="btn btn-link btn-xs" name="remove">
@@ -71,10 +86,15 @@
                                                         </button>
 
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </form>
-                        <?php $total = $total + $value['price'];
+                                       
+                                            
+                        <?php
+
+                                        
                                     };
                                 };
                             };
@@ -83,6 +103,9 @@
 
 
                         ?>
+
+
+                                        
 
 
                         <!-- <hr>
@@ -125,7 +148,8 @@
                     <div class="panel-footer">
                         <div class="row text-center">
                             <div class="col-xs-9">
-                                <h4 class="text-right" style="padding-top: 10px;">Total : <?php echo " " . number_format($total); ?> <strong></strong></h4>
+                            
+                             <h4 class="text-right " id="gtotal" style="font-weight :bold"><strong>  </strong></h4>
                             </div>
                             <div class="col-xs-3">
                                 <a href="checkout.php" style="text-decoration: none;"> <button type="button" class="btn btn-success btn-block" style="background-color:#D10024 ;color:white;font-weight:900">
@@ -138,6 +162,24 @@
             </div>
         </div>
     </div>
+
+
+                                    <script>
+                                        var iprice=document.getElementsByClassName('iprice')
+                                        var iquantity=document.getElementsByClassName('iquantity');
+                                        var gtotal=document.getElementById('gtotal');
+                                        var gt =0;
+
+                                        function countTotal(){
+                                            gt=0
+                                            for ( i=0; i < iprice.length; i++) {
+                                               gt=gt+(iprice[i].value)*(iquantity[i].value);
+                                               gtotal.innerText="Total : "+Intl.NumberFormat().format(gt) ;
+                                                
+                                            }
+                                        }  
+                                        countTotal();
+                                         </script>
     <?php include "footer.html"; ?>
 
     </html>

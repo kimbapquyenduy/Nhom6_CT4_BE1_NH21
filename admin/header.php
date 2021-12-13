@@ -4,15 +4,18 @@ require "models/db.php";
 require "models/product.php";
 require "models/manufacture.php";
 require "models/Protypes.php";
+require "models/account.php";
 
 $manu = new Manufacture;
 $product = new Product;
 $pro = new Protypes;
+$user = new Account;
 
 $getAllManu = $manu->getAllManu();
 $getAllProducts = $product->getAllProducts();
 $getNewProducts = $product->getNewProducts();
 $getallpro = $pro->getAllPro();
+$getalluser = $user->getAllAccount();
 session_start();
 if (isset($_SESSION['username'])) {
     if ($_SESSION['username'] == "admin") {
@@ -21,7 +24,7 @@ if (isset($_SESSION['username'])) {
     }
 } else {
 
-    echo "<script>window.location='../index.php'</script>";
+    echo "<script>window.location='../login-form/login.php'</script>";
 }
 
 
@@ -217,7 +220,7 @@ if (isset($_SESSION['username'])) {
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">Admin</a>
                     </div>
                 </div>
 
@@ -282,6 +285,16 @@ if (isset($_SESSION['username'])) {
                             </a>
 
                         </li>
+                        <li class="nav-item <?php echo ($page == "/nhom6/admin/User.php" ? "menu-open" : "") ?>">
+                            <a href="User.php" class="nav-link <?php echo ($page == "/nhom6/admin/User.php" ? "active" : "") ?>" style="a:hover ">
+                                <i class="nav-icon fas fa-mobile"></i>
+                                <p>
+                                    User
+
+                                </p>
+                            </a>
+
+                        </li>
                         <li class="nav-item <?php echo ($page == "/nhom6/admin/project-add.php" ? "menu-open" : "") ?>">
                             <a href="project-add.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-add.php" ? "active" : "") ?>" style="a:hover ">
                                 <i class="nav-icon fas fa-mobile"></i>
@@ -312,11 +325,11 @@ if (isset($_SESSION['username'])) {
                             </a>
 
                         </li>
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item <?php echo ($page == "/nhom6/admin/project-adduser.php" ? "menu-open" : "") ?>">
+                            <a href="project-adduser.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-adduser.php" ? "active" : "") ?>" style="a:hover ">
+                                <i class="nav-icon fas fa-mobile"></i>
                                 <p>
-                                    User
+                                    Add-User
 
                                 </p>
                             </a>
