@@ -36,10 +36,7 @@ include "header.php"  ?>
               </div>
             </div>
             <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">Id</label>
-                <input type="text" id="inputName" class="form-control" name="type_id">
-              </div>
+
               <div class="form-group">
                 <label for="inputName">Protype name</label>
                 <input type="text" id="inputName" class="form-control" name="type_name">

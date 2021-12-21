@@ -10,9 +10,14 @@ $product = new Product;
 if (isset($_POST['submit'])) {
     # code...
 
-    $manu_id = $_POST['manu_id'];
-    $manu_name = $_POST['manu_name'];
+    if (!isset($_POST['manu_name']) || trim($_POST['manu_name']) == '') {
+        echo "<script>alert('You need to fill all information to add  !')</script>";
+        echo "<script>window.location='project-addmanu.php'</script>";
+    } else {
 
-    $manu->addManu($manu_id, $manu_name);
+
+        $manu_name = $_POST['manu_name'];
+        $manu->addManu($manu_name);
+        header('location:Manufactures.php');
+    }
 }
-header('location:index.php');

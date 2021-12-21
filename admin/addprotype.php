@@ -10,9 +10,12 @@ $protype = new Protypes;
 if (isset($_POST['submit'])) {
     # code...
 
-    $type_id = $_POST['type_id'];
-    $type_name = $_POST['type_name'];
-
-    $protype->addprotype($type_id, $type_name);
+    if (!isset($_POST['type_name']) || trim($_POST['type_name']) == '') {
+        echo "<script>alert('You need to fill all information to add  !')</script>";
+        echo "<script>window.location='project-addprotype.php'</script>";
+    } else {
+        $type_name = $_POST['type_name'];
+        $protype->addprotype($type_name);
+        header('location:Protypes.php');
+    }
 }
-header('location:index.php');

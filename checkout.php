@@ -1,8 +1,7 @@
 <?php include "header.php";
 if (!isset($_SESSION['username'])) {
-	
-		echo "<script>window.location='login-form/login.php'</script>";
-	
+
+	echo "<script>window.location='login-form/login.php'</script>";
 }
 
 ?>
@@ -145,25 +144,22 @@ if (!isset($_SESSION['username'])) {
 
 						$total = 0;
 						if (isset($_SESSION['cart'])) {
-							# code...
-
-							$productid = array_column($_SESSION['cart'], 'productid');
 
 
 							foreach ($getAllProducts as $value) {
-								foreach ($productid as $id) {
-									if ($value['id'] == $id) {
+								foreach ($_SESSION['cart'] as $key => $value2) {
+									if ($value['id'] == $value2['productid']) {
 
 
 						?>
 
 										<div class="order-col">
 											<div><?php echo $value['name'] ?></div>
-											<div><?php echo number_format($value['price']) . " VND"; ?></div>
+											<div><?php echo number_format($value['price']) . " VND  X " . $value2['num']; ?></div>
 										</div>
 
 
-						<?php $total = $total + $value['price'];
+						<?php $total = $total + ($value['price'] * $value2['num']);
 									};
 								};
 							};

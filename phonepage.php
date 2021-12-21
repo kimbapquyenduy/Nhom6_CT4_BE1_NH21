@@ -1,4 +1,6 @@
 <?php include "header.php"; ?>
+
+
 <!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">
 	<!-- container -->
@@ -91,23 +93,7 @@
 				<!-- /aside Widget -->
 
 				<!-- aside Widget -->
-				<div class="aside">
-					<h3 class="aside-title">Price</h3>
-					<div class="price-filter">
-						<div id="price-slider"></div>
-						<div class="input-number price-min">
-							<input id="price-min" type="number">
-							<span class="qty-up">+</span>
-							<span class="qty-down">-</span>
-						</div>
-						<span>-</span>
-						<div class="input-number price-max">
-							<input id="price-max" type="number">
-							<span class="qty-up">+</span>
-							<span class="qty-down">-</span>
-						</div>
-					</div>
-				</div>
+
 				<!-- /aside Widget -->
 
 				<!-- aside Widget -->
@@ -166,43 +152,7 @@
 				</div>
 				<!-- /aside Widget -->
 
-				<!-- aside Widget -->
-				<div class="aside">
-					<h3 class="aside-title">Top selling</h3>
-					<div class="product-widget">
-						<div class="product-img">
-							<img src="./img/product01.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name"><a href="#">product name goes here</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						</div>
-					</div>
 
-					<div class="product-widget">
-						<div class="product-img">
-							<img src="./img/product02.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name"><a href="#">product name goes here</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						</div>
-					</div>
-
-					<div class="product-widget">
-						<div class="product-img">
-							<img src="./img/product03.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name"><a href="#">product name goes here</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						</div>
-					</div>
-				</div>
-				<!-- /aside Widget -->
 			</div>
 			<!-- /ASIDE -->
 
@@ -236,74 +186,63 @@
 
 				<!-- store products -->
 				<div class="row">
+
 					<?php
 
+					$types = 1;
+					$GetProductsByManu = $product->getProductsByProtype($types);
 
+					// hiển thị 5 sản phẩm trên 1 trang
+					$perPage = 3;
+					// Lấy số trang trên thanh địa chỉ
+					$page = isset($_GET['page']) ? $_GET['page'] : 1;
+					// Tính tổng số dòng
+					$total = count($GetProductsByManu);
+					// lấy đường dẫn đến file hiện hành
+					$url = $_SERVER['PHP_SELF'];
+					$Get3ProductsByPro = $product->get3ProductsByPro($types, $page, $perPage);
 
-					if (isset($_GET['keyword'])) {
-						# code...
-
-						$keyword = $_GET['keyword'];
-						$perPage = 3;
-						$search = $product->search($keyword);
-						// Lấy số trang trên thanh địa chỉ
-						$page = isset($_GET['page']) ? $_GET['page'] : 1;
-						// Tính tổng số dòng
-						$total = count($search);
-						// lấy đường dẫn đến file hiện hành
-						$url = $_SERVER['PHP_SELF'] . "?keyword=" . $keyword;
-
-						$search3pro = $product->search3pro($keyword, $page, $perPage);
-						if (empty($search3pro)) {
-							echo "Không có sản phẩm nào";
-						} else
-
-							foreach ($search3pro as $value) {
-
-
+					foreach ($Get3ProductsByPro as $value) :
 					?>
-
-							<!-- product -->
-							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="./img/<?php echo $value['image'] ?>" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="detail.php?id=<?php echo $value['id']; ?>"><?php echo $value['name'] ?></a></h3>
-										<h4 class="product-price"><?php echo number_format($value['price']) ?> VND </h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<form action="" method="post">
-											<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
-											<input type="hidden" name="num" value=1>
-										</form>
+						<!-- product -->
+						<div class="col-md-4 col-xs-6">
+							<div class="product">
+								<div class="product-img">
+									<img src="./img/<?php echo $value['image'] ?>" alt="">
+									<div class="product-label">
+										<span class="sale">-30%</span>
+										<span class="new">NEW</span>
 									</div>
 								</div>
+								<div class="product-body">
+									<p class="product-category">Category</p>
+									<h3 class="product-name"><a href="detail.php?id=<?php echo $value['id']; ?>"><?php echo $value['name'] ?></a></h3>
+									<h4 class="product-price"><?php echo number_format($value['price']);  ?> VND</h4>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+									<div class="product-btns">
+										<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+										<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+										<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+									</div>
+								</div>
+								<div class="add-to-cart">
+									<form action="" method="post">
+										<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
+										<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
+										<input type="hidden" name="num" value=1>
+									</form>
+								</div>
 							</div>
-							<!-- /product -->
-						<?php
+						</div>
+						<!-- /product -->
+					<?php endforeach; ?>
 
-							}
-						?>
 				</div>
 				<!-- /store products -->
 
@@ -311,12 +250,16 @@
 				<div class="store-filter clearfix">
 					<span class="store-qty">Showing 20-100 products</span>
 					<ul class="store-pagination">
-						<?php echo $product->paginate($url, $total, $perPage); ?>
+
+						<?php
+
+
+
+						echo $product->paginate2($url, $total, $perPage) ?>
 					</ul>
 				</div>
-			<?php } ?>
-			<!-- /store bottom filter -->
-
+				<!-- /store bottom filter -->
+				<?php  ?>
 			</div>
 			<!-- /STORE -->
 		</div>
@@ -325,5 +268,4 @@
 	<!-- /container -->
 </div>
 <!-- /SECTION -->
-
-<?php include "footer.html" ?>
+<?php include "footer.html"; ?>

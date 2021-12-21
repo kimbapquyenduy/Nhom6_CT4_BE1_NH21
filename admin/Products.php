@@ -63,10 +63,13 @@ include "header.php"
               <th style="width: 10%" class="text-center">
                 Prototype
               </th>
+              <th style="width: 5%" class="text-center">
+                feature
+              </th>
               <th style="width: 10%" class="text-center">
                 Create at
               </th>
-              <th style="width: 15%" class="text-center">
+              <th style="width: 20%" class="text-center">
                 Action
               </th>
             </tr>
@@ -113,6 +116,9 @@ include "header.php"
                 </td>
                 <td class="project-state">
                   <?php echo $value['type_name'] ?>
+                </td>
+                <td class="project-state">
+                  <?php echo $value['feature'] ?>
                 </td>
                 <td class="project-state">
                   <?php echo $value['created_at'] ?>

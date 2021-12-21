@@ -16,12 +16,13 @@ if (isset($_POST['submit'])) {
     $type_id = $_POST['pro'];
     $price = $_POST['price'];
     $desc = $_POST['desc'];
+    $feature = $_POST['feature'];
     if (isset($_FILES['image'])) {
         $image = $_FILES['image']['name'];
     } else {
         $image = "";
     }
-    $product->editProduct($name, $manu_id, $type_id, $price, $image, $desc, $_GET['id']);
+    $product->editProduct($name, $manu_id, $type_id, $price, $image, $desc, $_GET['id'], $feature);
 
     $target_dir = "../img/";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);

@@ -17,4 +17,4 @@ if (isset($_POST['submit'])) {
 
 
 
-header('location:Products.php');
+header('location:Manufactures.php');

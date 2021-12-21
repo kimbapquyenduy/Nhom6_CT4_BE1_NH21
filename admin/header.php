@@ -287,7 +287,7 @@ if (isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-item <?php echo ($page == "/nhom6/admin/User.php" ? "menu-open" : "") ?>">
                             <a href="User.php" class="nav-link <?php echo ($page == "/nhom6/admin/User.php" ? "active" : "") ?>" style="a:hover ">
-                                <i class="nav-icon fas fa-mobile"></i>
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     User
 
@@ -297,7 +297,7 @@ if (isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-item <?php echo ($page == "/nhom6/admin/project-add.php" ? "menu-open" : "") ?>">
                             <a href="project-add.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-add.php" ? "active" : "") ?>" style="a:hover ">
-                                <i class="nav-icon fas fa-mobile"></i>
+                                <i class="nav-icon fas fa-plus"></i>
                                 <p>
                                     Add-product
 
@@ -307,7 +307,7 @@ if (isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-item <?php echo ($page == "/nhom6/admin/project-addmanu.php" ? "menu-open" : "") ?>">
                             <a href="project-addmanu.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-addmanu.php" ? "active" : "") ?>" style="a:hover ">
-                                <i class="nav-icon fas fa-mobile"></i>
+                                <i class="nav-icon fas fa-plus"></i>
                                 <p>
                                     Add-Manufacture
 
@@ -317,7 +317,7 @@ if (isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-item <?php echo ($page == "/nhom6/admin/project-addprotype.php" ? "menu-open" : "") ?>">
                             <a href="project-addprotype.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-addprotype.php" ? "active" : "") ?>" style="a:hover ">
-                                <i class="nav-icon fas fa-mobile"></i>
+                                <i class="nav-icon fas fa-plus"></i>
                                 <p>
                                     Add-Protype
 
@@ -327,7 +327,7 @@ if (isset($_SESSION['username'])) {
                         </li>
                         <li class="nav-item <?php echo ($page == "/nhom6/admin/project-adduser.php" ? "menu-open" : "") ?>">
                             <a href="project-adduser.php" class="nav-link <?php echo ($page == "/nhom6/admin/project-adduser.php" ? "active" : "") ?>" style="a:hover ">
-                                <i class="nav-icon fas fa-mobile"></i>
+                                <i class="nav-icon fas fa-plus"></i>
                                 <p>
                                     Add-User
 

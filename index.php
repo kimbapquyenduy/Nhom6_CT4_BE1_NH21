@@ -15,7 +15,7 @@ include "header.php";
 					</div>
 					<div class="shop-body">
 						<h3>Laptop<br>Collection</h3>
-						<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="laptoppage.php" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
@@ -28,8 +28,8 @@ include "header.php";
 						<img src="./img/shop03.png" alt="">
 					</div>
 					<div class="shop-body">
-						<h3>Accessories<br>Collection</h3>
-						<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+						<h3>Headphones<br>Collection</h3>
+						<a href="headphonepage.php" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
@@ -39,11 +39,11 @@ include "header.php";
 			<div class="col-md-4 col-xs-6">
 				<div class="shop">
 					<div class="shop-img">
-						<img src="./img/shop02.png" alt="">
+						<img src="./img/nhung-hinh-anh-chan-thuc-den-tung-chi-tiet-ve-iphone-9-3-600x400.jpg" alt="">
 					</div>
 					<div class="shop-body">
-						<h3>Cameras<br>Collection</h3>
-						<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+						<h3>Phone<br>Collection</h3>
+						<a href="phonepage.php" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
@@ -111,7 +111,7 @@ include "header.php";
 											<form action="" method="post">
 												<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
 												<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
-												<input type="hidden" name="num" value="1">
+												<input type="hidden" name="num" value=1>
 											</form>
 										</div>
 									</div>
@@ -194,7 +194,7 @@ include "header.php";
 			<!-- section title -->
 			<div class="col-md-12">
 				<div class="section-title">
-					<h3 class="title">Top selling</h3>
+					<h3 class="title">Our Products</h3>
 					<div class="section-nav">
 						<ul class="section-tab-nav tab-nav">
 							<?php if (isset($_GET['type_id'])) { ?>
@@ -271,6 +271,7 @@ include "header.php";
 											<form action="" method="post">
 												<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
 												<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
+												<input type="hidden" name="num" value=1>
 											</form>
 										</div>
 									</div>
@@ -301,7 +302,7 @@ include "header.php";
 		<div class="row">
 			<div class="col-md-4 col-xs-6">
 				<div class="section-title">
-					<h4 class="title">Top selling Apple</h4>
+					<h4 class="title">Apple Products</h4>
 					<div class="section-nav">
 						<div id="slick-nav-3" class="products-slick-nav"></div>
 					</div>
@@ -398,7 +399,7 @@ include "header.php";
 
 			<div class="col-md-4 col-xs-6">
 				<div class="section-title">
-					<h4 class="title">Top selling Xiaomi</h4>
+					<h4 class="title">Xiaomi Products</h4>
 					<div class="section-nav">
 						<div id="slick-nav-5" class="products-slick-nav"></div>
 					</div>

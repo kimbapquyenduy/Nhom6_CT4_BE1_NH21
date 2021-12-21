@@ -17,10 +17,10 @@ class Protypes extends Db
 
         return $sql->execute(); //return an object
     }
-    public function addprotype($type_id, $type_name)
+    public function addprotype($type_name)
     {
-        $sql = self::$connection->prepare("INSERT INTO `protypes`(`type_id`, `type_name`) VALUES (?,?)");
-        $sql->bind_param("is", $type_id, $type_name);
+        $sql = self::$connection->prepare("INSERT INTO `protypes`(`type_name`) VALUES (?)");
+        $sql->bind_param("s", $type_name);
 
         return $sql->execute(); //return an object
     }

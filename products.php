@@ -92,25 +92,7 @@
 				</div>
 				<!-- /aside Widget -->
 
-				<!-- aside Widget -->
-				<div class="aside">
-					<h3 class="aside-title">Price</h3>
-					<div class="price-filter">
-						<div id="price-slider"></div>
-						<div class="input-number price-min">
-							<input id="price-min" type="number">
-							<span class="qty-up">+</span>
-							<span class="qty-down">-</span>
-						</div>
-						<span>-</span>
-						<div class="input-number price-max">
-							<input id="price-max" type="number">
-							<span class="qty-up">+</span>
-							<span class="qty-down">-</span>
-						</div>
-					</div>
-				</div>
-				<!-- /aside Widget -->
+
 
 				<!-- aside Widget -->
 				<div class="aside">
@@ -168,43 +150,7 @@
 				</div>
 				<!-- /aside Widget -->
 
-				<!-- aside Widget -->
-				<div class="aside">
-					<h3 class="aside-title">Top selling</h3>
-					<div class="product-widget">
-						<div class="product-img">
-							<img src="./img/product01.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name"><a href="#">product name goes here</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						</div>
-					</div>
 
-					<div class="product-widget">
-						<div class="product-img">
-							<img src="./img/product02.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name"><a href="#">product name goes here</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						</div>
-					</div>
-
-					<div class="product-widget">
-						<div class="product-img">
-							<img src="./img/product03.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name"><a href="#">product name goes here</a></h3>
-							<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-						</div>
-					</div>
-				</div>
-				<!-- /aside Widget -->
 			</div>
 			<!-- /ASIDE -->
 
@@ -289,6 +235,7 @@
 										<form action="" method="post">
 											<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
 											<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
+											<input type="hidden" name="num" value=1>
 										</form>
 									</div>
 								</div>

@@ -16,10 +16,10 @@ class Manufacture extends Db
 
         return $sql->execute(); //return an object
     }
-    public function addManu($manu_id, $manu_name)
+    public function addManu($manu_name)
     {
-        $sql = self::$connection->prepare("INSERT INTO `manufactures`(`manu_id`, `manu_name`) VALUES (?,?)");
-        $sql->bind_param("is", $manu_id, $manu_name);
+        $sql = self::$connection->prepare("INSERT INTO `manufactures`(`manu_name`) VALUES (?)");
+        $sql->bind_param("s", $manu_name);
 
         return $sql->execute(); //return an object
     }

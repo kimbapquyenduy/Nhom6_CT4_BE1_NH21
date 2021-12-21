@@ -16,15 +16,20 @@ class Account extends Db
 
         return $sql->execute(); //return an object
     }
-    public function addAccount($username, $password, $role)
+    public function addAccount($username, $password)
     {
+        $password = md5($password);
         $sql = self::$connection->prepare("INSERT INTO `accounts`(`username`, `password`,`role`) VALUES (?,?,?)");
+        $role = 2;
         $sql->bind_param("ssi", $username, $password, $role);
 
         return $sql->execute(); //return an object
+
+
     }
     public function editAccount($username, $password, $id)
     {
+        $password = md5($password);
         $sql = self::$connection->prepare("UPDATE `accounts` SET `username`=?, `password`=? WHERE userid=?");
         $sql->bind_param("ssi", $username, $password, $id);
         //return an object

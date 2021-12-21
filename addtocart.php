@@ -12,7 +12,9 @@
         }
     }
 }
-
+if (isset($_POST['change'])) {
+    $_SESSION['cart'][$_POST['pos']]['num'] = (int)$_POST['quan'];
+}
 
 
 ?>
@@ -51,9 +53,9 @@
 
 
                             foreach ($getAllProducts as $value) {
-                                foreach ($_SESSION['cart'] as $value2) {
+                                foreach ($_SESSION['cart'] as $key => $value2) {
                                     if ($value['id'] == $value2['productid']) {
-                                       
+
 
                         ?>
                                         <form action="addtocart.php?action=remove&id=<?php echo $value['id'] ?>" method="post">
@@ -66,15 +68,15 @@
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <div class="col-xs-6 text-right">
-                                                    <input type="hidden"  class="iprice" value="<?php echo $value['price']?>">
-                                                        <h6 style="padding-top: 20px;font-size:15px" ><strong><?php echo number_format($value['price']);  ?> <span class="text-muted">x</span> </strong></h6>
+                                                        <input type="hidden" class="iprice" value="<?php echo $value['price'] ?>">
+                                                        <h6 style="padding-top: 20px;font-size:15px"><strong><?php echo number_format($value['price']);  ?> <span class="text-muted">x</span> </strong></h6>
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <h5 style="padding-top: 15px;font-size:15px">
-                                                            <form action="" method="post">
-                                                                <input type="number" class="iquantity" onchange="countTotal()" min="1" max="10" name="quan" value="<?php echo $value2['num'] ?>">
-                                                               
-
+                                                            <form action="updatequan.php" method="post">
+                                                                <input type="hidden" name="pos" value="<?php echo $key; ?>">
+                                                                <input type="number" class="iquantity" onchange="countTotal()" min="1" max="10" name="quan" value="<?php echo $value2['num']; ?>">
+                                                                <input type="submit" name="change" value="Save Change">
                                                             </form>
                                                         </h5>
                                                     </div>
@@ -90,11 +92,12 @@
                                                 </div>
                                             </div>
                                         </form>
-                                       
-                                            
+
+
                         <?php
 
-                                        
+
+
                                     };
                                 };
                             };
@@ -105,7 +108,7 @@
                         ?>
 
 
-                                        
+
 
 
                         <!-- <hr>
@@ -148,8 +151,10 @@
                     <div class="panel-footer">
                         <div class="row text-center">
                             <div class="col-xs-9">
-                            
-                             <h4 class="text-right " id="gtotal" style="font-weight :bold"><strong>  </strong></h4>
+
+                                <h4 class="text-right " id="gtotal" style="font-weight :bold"><strong> </strong></h4>
+
+
                             </div>
                             <div class="col-xs-3">
                                 <a href="checkout.php" style="text-decoration: none;"> <button type="button" class="btn btn-success btn-block" style="background-color:#D10024 ;color:white;font-weight:900">
@@ -164,22 +169,23 @@
     </div>
 
 
-                                    <script>
-                                        var iprice=document.getElementsByClassName('iprice')
-                                        var iquantity=document.getElementsByClassName('iquantity');
-                                        var gtotal=document.getElementById('gtotal');
-                                        var gt =0;
+    <script>
+        var iprice = document.getElementsByClassName('iprice')
+        var iquantity = document.getElementsByClassName('iquantity');
+        var gtotal = document.getElementById('gtotal');
+        var gt = 0;
 
-                                        function countTotal(){
-                                            gt=0
-                                            for ( i=0; i < iprice.length; i++) {
-                                               gt=gt+(iprice[i].value)*(iquantity[i].value);
-                                               gtotal.innerText="Total : "+Intl.NumberFormat().format(gt) ;
-                                                
-                                            }
-                                        }  
-                                        countTotal();
-                                         </script>
+        function countTotal() {
+            gt = 0
+            for (i = 0; i < iprice.length; i++) {
+                gt = gt + (iprice[i].value) * (iquantity[i].value);
+                gtotal.innerText = "Total : " + Intl.NumberFormat().format(gt) + " VND";
+
+            }
+
+        }
+        countTotal();
+    </script>
     <?php include "footer.html"; ?>
 
     </html>

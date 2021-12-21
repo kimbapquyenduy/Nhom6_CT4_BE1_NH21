@@ -15,4 +15,4 @@ if (isset($_POST['submit'])) {
 
 
 
-header('location:Products.php');
+header('location:Protypes.php');

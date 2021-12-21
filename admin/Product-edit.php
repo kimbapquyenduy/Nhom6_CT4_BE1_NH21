@@ -93,6 +93,21 @@ include "header.php"  ?>
                   <label for="inputDescription">Description</label>
                   <textarea id="inputDescription" class="form-control" rows="4" name="desc"><?php echo $value1['descripsion']; ?></textarea>
                 </div>
+                <div class="form-group">
+                  <label for="inputClientCompany">feature : </label>
+                  <select name="feature" id="">
+                    <?php if ($value1['feature'] == 1) { ?>
+                      <option selected value="1">1</option>
+                      <option value="0">0</option> <?php
+                                                  } else { ?>
+                      <option value="1">1</option>
+                      <option selected value="0">0</option>
+                    <?php
+                                                  } ?>
+
+                  </select>
+                </div>
+
                 <script>
                   var loadFile = function(event) {
                     var reader = new FileReader();

@@ -72,11 +72,25 @@ include "header.php"  ?>
                 <label for="inputDescription">Description</label>
                 <textarea id="inputDescription" class="form-control" rows="4" name="desc"></textarea>
               </div>
-
+              <div class="form-group">
+                <label for="inputClientCompany">feature : </label>
+                <input type="checkbox" id="" class="" name="feature" style="width: 20px; " value="1">
+              </div>
+              <script>
+                var loadFile = function(event) {
+                  var reader = new FileReader();
+                  reader.onload = function() {
+                    var output = document.getElementById('thumb');
+                    output.src = reader.result;
+                  };
+                  reader.readAsDataURL(event.target.files[0]);
+                };
+              </script>
 
               <div class="form-group">
                 <label for="inputProjectLeader">image</label>
-                <input type="file" id="inputProjectLeader" class="form-control" name="image">
+                <input type="file" onchange="loadFile(event)" id="inputProjectLeader" class="form-control" name="image">
+                <img id="thumb" src="../img/" width="200px" />
               </div>
             </div>
             <!-- /.card-body -->

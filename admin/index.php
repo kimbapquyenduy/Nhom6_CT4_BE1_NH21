@@ -104,7 +104,7 @@ include "header.php";
               <?php
 
               $count = 0;
-              foreach ($getalluser as $value) {
+              foreach ($getallpro as $value) {
                 $count++;
               }
               ?>
@@ -147,10 +147,10 @@ include "header.php";
               <div class="tab-content p-0">
                 <!-- Morris chart - Sales -->
                 <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                  <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                  <canvas id="revenue-chart-canvas" height="200" style="height: 300px;"></canvas>
                 </div>
                 <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                  <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                  <canvas id="sales-chart-canvas" height="10" style="height: 10px;"></canvas>
                 </div>
               </div>
             </div><!-- /.card-body -->
@@ -563,7 +563,7 @@ include "header.php";
             <div class="card-footer bg-transparent">
               <div class="row">
                 <div class="col-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="100" data-width="60" data-height="60" data-fgColor="#39CCCC">
+                  <input type="text" class="knob" data-readonly="true" value="12" data-width="60" data-height="60" data-fgColor="#39CCCC">
 
                   <div class="text-white">Mail-Orders</div>
                 </div>

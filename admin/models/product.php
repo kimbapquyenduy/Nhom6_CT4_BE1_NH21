@@ -21,25 +21,25 @@
             $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
             return $items; //return an array
         }
-        public function editProduct($name, $manu_id, $type_id, $price, $image, $desc, $id)
+        public function editProduct($name, $manu_id, $type_id, $price, $image, $desc, $id, $feature)
         {
             if ($image == "") {
-                $sql = self::$connection->prepare("UPDATE `products` SET `name`=?,`manu_id`=?,`type_id`=?,`price`=?,`descripsion`=? WHERE id = ?");
-                $sql->bind_param("siiisi", $name, $manu_id, $type_id, $price, $desc, $id);
+                $sql = self::$connection->prepare("UPDATE `products` SET `name`=?,`manu_id`=?,`type_id`=?,`price`=?,`descripsion`=?,`feature`=? WHERE id = ?");
+                $sql->bind_param("siiisii", $name, $manu_id, $type_id, $price, $desc, $feature, $id);
             } else {
-                $sql = self::$connection->prepare("UPDATE `products` SET `name`=?,`manu_id`=?,`type_id`=?,`price`=?,`image`=?,`descripsion`=? WHERE id = ?");
-                $sql->bind_param("siiissi", $name, $manu_id, $type_id, $price, $image, $desc, $id);
+                $sql = self::$connection->prepare("UPDATE `products` SET `name`=?,`manu_id`=?,`type_id`=?,`price`=?,`image`=?,`descripsion`=?,`feature`=? WHERE id = ?");
+                $sql->bind_param("siiissii", $name, $manu_id, $type_id, $price, $image, $desc, $feature, $id);
                 //return an object
             }
             return  $sql->execute();
         }
 
-        public function addProduct($name, $manu_id, $type_id, $price, $image, $desc)
+        public function addProduct($name, $manu_id, $type_id, $price, $feature, $image, $desc)
         {
             $sql = self::$connection->prepare("INSERT 
-        INTO `products`(`name`, `manu_id`, `type_id`, `price`, `image`, `descripsion`) 
-        VALUES (?,?,?,?,?,?)");
-            $sql->bind_param("siiiss", $name, $manu_id, $type_id, $price, $image, $desc);
+        INTO `products`(`name`, `manu_id`, `type_id`, `price`, `image`, `descripsion`,`feature`) 
+        VALUES (?,?,?,?,?,?,?)");
+            $sql->bind_param("siiissi", $name, $manu_id, $type_id, $price, $image, $desc, $feature);
 
             return $sql->execute(); //return an object
         }
@@ -120,7 +120,7 @@
             $sql = self::$connection->prepare("SELECT * 
             FROM products,manufactures,protypes
             WHERE products.manu_id=manufactures.manu_id
-            AND products.type_id=protypes.type_id LIMIT ?,?");
+            AND products.type_id=protypes.type_id  order by created_at desc LIMIT ?,?");
             $sql->bind_param("ii", $firstLink, $perPage);
             $sql->execute(); //return an object
             $items = array();

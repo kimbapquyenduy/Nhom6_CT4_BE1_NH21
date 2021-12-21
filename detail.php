@@ -20,7 +20,7 @@ include "header.php";
 
 				<div class="col-md-6 col-xs-4" style=" padding-top: 17px;float: left;width:400px;">
 					<div class="section-title">
-						<h4 class="title" style="padding-top: 20px; color:#D10024;font-weight: bold;">Hot Product !!! </i></h4>
+						<h4 class="title" style="padding-top: 20px; color:#D10024;font-weight: bold;">Related Product !!! </i></h4>
 						<div class="section-nav">
 							<div id="slick-nav-4" class="products-slick-nav"></div>
 						</div>
@@ -28,33 +28,38 @@ include "header.php";
 
 					<div class="products-widget-slick" data-nav="#slick-nav-4">
 						<?php
-						$slide = count($product->getHotProduct()) / 5;
-
-						$perslide = 5;
+						$slide = count($product->getProductByManu($value['manu_id'])) / 5;
+						$perslide = 4;
 						$curslide = 1;
 
 						for ($i = 0; $i < $slide; $i++) {
 							# code...
-							$get3Hotproducts = $product->get3HotProduct($curslide, $perslide);
+							$get3Hotproducts = $product->get3ProductsByManu($value['manu_id'], $curslide, $perslide);
 						?>
 
 							<div>
-								<?php foreach ($get3Hotproducts as $value2) { ?>
-									<!-- product widget -->
+								<?php foreach ($get3Hotproducts as $value2) {
+									if ($value2['id'] == $value['id']) {
+									} else {
+										# code...
 
-									<div class="product-widget">
-										<div class="product-img">
-											<img src="./img/<?php echo $value2['image'] ?> " alt="">
-										</div>
-										<div class="product-body">
-											<p class="product-category"><?php echo $value2['type_name'] ?></p>
-											<h3 class="product-name"><a href="detail.php?id=<?php echo $value2['id']; ?>"><?php echo $value2['name'] ?></a></h3>
-											<h4 class="product-price"><?php echo number_format($value2['price']); ?></h4>
-										</div>
-									</div>
+								?>
+										<!-- product widget -->
 
-									<!-- /product widget -->
-								<?php } ?>
+										<div class="product-widget">
+											<div class="product-img">
+												<img src="./img/<?php echo $value2['image'] ?> " alt="">
+											</div>
+											<div class="product-body">
+												<p class="product-category"><?php echo $value2['type_name'] ?></p>
+												<h3 class="product-name"><a href="detail.php?id=<?php echo $value2['id']; ?>"><?php echo $value2['name'] ?></a></h3>
+												<h4 class="product-price"><?php echo number_format($value2['price']); ?></h4>
+											</div>
+										</div>
+
+										<!-- /product widget -->
+								<?php }
+								} ?>
 							</div>
 						<?php
 							$curslide++;
@@ -78,6 +83,7 @@ include "header.php";
 							<form action="" method="post">
 								<button class="add-to-cart-btn" type="submit" name="add"><i class="fa fa-shopping-cart"></i> add to cart</button>
 								<input type="hidden" name="productid" value=<?php echo $value['id'] ?>>
+								<input type="hidden" name="num" value=1>
 							</form>
 						</div>
 					</div>
